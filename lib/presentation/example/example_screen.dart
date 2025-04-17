@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class examplescreen extends StatefulWidget {
+  const examplescreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<examplescreen> createState() => _examplescreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _examplescreenState extends State<examplescreen> {
   int _count = 0; // 클릭 횟수 저장 변수
 
   void_handleIncreaseCount() {
