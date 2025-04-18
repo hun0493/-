@@ -1,4 +1,4 @@
-enum AppRoute { start, main }
+enum AppRoute { start, main, result }
 
 extension AppRouteExtensionon on AppRoute {
   String get topath => '/$name';

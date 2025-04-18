@@ -20,7 +20,7 @@ class _heightBoxState extends State<heightBox> {
           Text('Height (CM)', style: TextStyle(fontSize: 18)),
           //숫자
           Text(
-            '$_height',
+            '${_height.toStringAsFixed(1)}',
             style: TextStyle(
               fontSize: 60,
               fontWeight: FontWeight.bold,
@@ -31,12 +31,15 @@ class _heightBoxState extends State<heightBox> {
           Slider(
             year2023: false,
             value: _height,
+            activeColor: Color(0xFF6C63FF),
             min: 50.0,
             max: 300.0,
             onChanged: (double value) {
               setState(() {
                 _height = value;
               });
+
+              widget.onChanged(_height);
             },
           ),
         ],

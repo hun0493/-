@@ -62,7 +62,7 @@ class Startscreen extends StatelessWidget {
               children: [
                 _buildappname(),
                 SizedBox(height: 60),
-                Image.asset('assets/images/bike.png'),
+                Image.asset('assets/images/BMI.png'),
                 SizedBox(height: 95),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

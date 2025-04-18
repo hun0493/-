@@ -1,18 +1,39 @@
+import 'package:daelim_2025/app/router/app_route.dart';
+import 'package:daelim_2025/presentation/common/widgets/gender_box.dart';
 import 'package:daelim_2025/presentation/common/widgets/height_box.dart';
 import 'package:daelim_2025/presentation/common/widgets/in_de_container.dart';
 import 'package:daelim_2025/presentation/common/widgets/white_box.dart';
-import 'package:flutter/material.dart';
 
-class MainScreen extends StatefulWidget {
-  const MainScreen({super.key});
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
+class _HeightBox extends StatefulWidget {
+  final Function(double height) onChanged;
 
   @override
-  State<MainScreen> createState() => _MyWidgetState();
+  State<heightBox> createState() => _HeightBoxState();
 }
 
-class _MyWidgetState extends State<MainScreen> {
+class _HeightBoxState extends State<heightBox> {
   int _age = 0;
   int _weight = 0;
+  double _height = 100.0;
+  Gender _gender = Gender.male;
+
+  void _onCalculated() {
+    debugPrint('나이: $_age');
+    debugPrint('몸무게: $_weight');
+    debugPrint('키: $_height');
+    debugPrint('성별: $_gender');
+    final chHeight = _height.round() / 100;
+    final bmi = _weight / (chHeight * chHeight);
+    debugPrint('BMI: $bmi');
+
+    context.goNamed(
+      AppRoute.result.name,
+      queryParameters: {'bmi': bmi.toStringAsFixed(2)},
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +48,7 @@ class _MyWidgetState extends State<MainScreen> {
               SizedBox(height: 35),
               Text('BMI CALCULATOR', style: TextStyle(fontSize: 20)),
               //#region 나이,몸무게 입력
+              WhiteBox(child: Text('Example content in WhiteBox')),
               Row(
                 spacing: 20,
                 children: [
@@ -72,14 +94,27 @@ class _MyWidgetState extends State<MainScreen> {
                   ),
                 ],
               ),
-              heightBox(),
+              heightBox(
+                onChanged: (height) {
+                  _height = height;
+                  debugPrint('키:$height');
+                },
+              ),
+
               //endregion
-              WhiteBox(padding: EdgeInsets.all(25), child: SizedBox.shrink()),
+
+              //#region 성별
+              GenderBox(
+                onChanged: (gender) {
+                  _gender = gender;
+                },
+              ),
+              //#region Calculate Button
               SizedBox(
                 width: double.infinity,
                 height: 75,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () => _onCalculated,
                   child: Text('Calculate BMI'),
                 ),
               ),
